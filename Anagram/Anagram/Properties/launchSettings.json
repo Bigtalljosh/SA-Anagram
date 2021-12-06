@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Anagram.Runner": {
+      "commandName": "Project",
+      "commandLineArgs": "example2.txt"
+    }
+  }
+}
