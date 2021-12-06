@@ -4,6 +4,7 @@ using Anagram.Logic.Solvers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Text;
 
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureLogging(builder =>
@@ -42,15 +43,17 @@ static async void Start(IServiceProvider services)
     IServiceProvider provider = serviceScope.ServiceProvider;
 
     FileReader reader = (FileReader)provider.GetService<IFileReader>();
-
-    var wordList = reader.GetAllWordsOfLengthFromFile(@"Data\example2.txt", 4);
+    var wordList = reader.GetAllWordsOfLengthFromFile(@"Data\example2.txt", 8);
 
     AnagramSolver solver = (AnagramSolver)provider.GetService<IAnagramSolver>();
-
     var results = await solver.SolveAnagrams(wordList);
+
+    var sb = new StringBuilder();
 
     foreach (var result in results)
     {
-        Console.WriteLine($"Word {result.Key} has {result.Value.Count} anagrams");
+        sb.AppendLine($"Word {result.Key} has the anagrams: {string.Join(", ", result.Value)}");
     }
+
+    Console.WriteLine(sb.ToString());
 }

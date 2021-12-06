@@ -20,22 +20,18 @@ public class AnagramSolver : IAnagramSolver
         {
             if (_anagrams.ContainsKey(word))
             {
-                _logger.LogInformation($"Word '{word}' was already in Dictionary, Adding to list.");
                 _anagrams[word].Add(word); // Just add the dupe for now
             }
             else
             {
-                _logger.LogInformation($"Word '{word}' was not in Dictionary, Checking if an anagram exists.");
                 var (result, key) = IsAnagramInDictionary(word); // Check if an anagram is already in dictionary
                 if (result)
                 {
-                    _logger.LogInformation($"Word '{word}' already has an anagram for this word in Dictionary, Adding to list.");
                     _anagrams[key].Add(word); // If there is an anagram, add it to it's list
                 }
                 else
                 {
-                    _logger.LogInformation($"Word '{word}' is a completely new word, adding to dictionary.");
-                    _anagrams.Add(word, new List<string>()); // Otherwise add the new word
+                    _anagrams.Add(word, new List<string> { word }); // Otherwise add the new word
                 }
             }
         }

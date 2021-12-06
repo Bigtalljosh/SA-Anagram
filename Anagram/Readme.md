@@ -50,7 +50,9 @@ TODO : FILL ME IN ONCE COMPLETED
 
 ### Big O Analysis
 
-TODO : FILL ME IN ONCE COMPLETED
+Runtime complexity is O(n * t) where n is the number of words, and t is the number of anagram groups
+
+Memory complexity is O(n*2)
 
 ### Reasons behind the data structures I have chosen
 

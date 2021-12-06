@@ -18,7 +18,6 @@ public class FileReader : IFileReader
 
         while ((line = await sr.ReadLineAsync()) != null && (line.Length <= length))
         {
-            _logger.LogInformation($"Read word: {line}");
             if (line.Length.Equals(length))
                 yield return line;
         }
