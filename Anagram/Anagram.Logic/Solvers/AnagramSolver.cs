@@ -22,18 +22,21 @@ public class AnagramSolver : IAnagramSolver
         {
             if (_anagrams.ContainsKey(word))
             {
-                _anagrams[word].Add(word); // Just add the dupe for now
+                _logger.LogDebug($"Word: {word} was found in the dictionary. Adding dupe to anagram list.");
+                _anagrams[word].Add(word);
             }
             else
             {
-                var (result, key) = IsAnagramInDictionary(word); // Check if an anagram is already in dictionary
+                var (result, key) = IsAnagramInDictionary(word);
                 if (result)
                 {
-                    _anagrams[key].Add(word); // If there is an anagram, add it to it's list
+                    _logger.LogDebug($"Word: {word} already has an anagram found in the dictionary. Adding word to anagram list.");
+                    _anagrams[key].Add(word);
                 }
                 else
                 {
-                    _anagrams.Add(word, new List<string> { word }); // Otherwise add the new word
+                    _logger.LogDebug($"Word: {word} is a new word and will be added to the dictionary.");
+                    _anagrams.Add(word, new List<string> { word });
                 }
             }
         }
@@ -48,6 +51,7 @@ public class AnagramSolver : IAnagramSolver
             if (IsAnagram(key, word))
                 return (true, key);
         }
+
         return (false, null);
     }
 

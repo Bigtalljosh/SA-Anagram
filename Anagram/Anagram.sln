@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anagram.Logic.UnitTests", "Anagram.Logic.UnitTests\Anagram.Logic.UnitTests.csproj", "{A96E45FD-B0AA-4A98-A5DC-E6871DA89BC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anagram.Runner.IntegrationTests", "Anagram.Runner.IntegrationTests\Anagram.Runner.IntegrationTests.csproj", "{07E8EE9C-91BD-4F48-9547-7F20FCE7C605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{BA6FB934-1C1F-4AC1-85AD-383D47C8C173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA6FB934-1C1F-4AC1-85AD-383D47C8C173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA6FB934-1C1F-4AC1-85AD-383D47C8C173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A96E45FD-B0AA-4A98-A5DC-E6871DA89BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A96E45FD-B0AA-4A98-A5DC-E6871DA89BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A96E45FD-B0AA-4A98-A5DC-E6871DA89BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A96E45FD-B0AA-4A98-A5DC-E6871DA89BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E8EE9C-91BD-4F48-9547-7F20FCE7C605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E8EE9C-91BD-4F48-9547-7F20FCE7C605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E8EE9C-91BD-4F48-9547-7F20FCE7C605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E8EE9C-91BD-4F48-9547-7F20FCE7C605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

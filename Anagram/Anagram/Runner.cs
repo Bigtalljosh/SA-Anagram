@@ -28,9 +28,10 @@ namespace Anagram.Runner
 
                 Console.WriteLine(sb.ToString());
 
+#if DEBUG
                 var fullPath = Path.Combine(Directory.GetCurrentDirectory(), $"output-{i}-length-words.txt");
-
                 File.WriteAllText(fullPath, sb.ToString(), Encoding.UTF8);
+#endif
                 sb.Clear();
             }
         }

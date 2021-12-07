@@ -5,6 +5,7 @@ using Anagram.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureLogging(builder =>
@@ -14,18 +15,17 @@ using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((_, services) =>
     {
         string inputFileName = args[0];
-        Console.WriteLine($"Attempting to find file: {inputFileName}");
-        Console.WriteLine($@"Full Path: {Directory.GetCurrentDirectory()}\Data\{inputFileName}");
-        if (File.Exists($@"{Directory.GetCurrentDirectory()}\Data\{inputFileName}"))
+
+        if (!File.Exists(inputFileName))
+        {
+            Console.WriteLine("Cannot find the file specified. Please check the name and try again.");
+            return;
+        }
+        else
         {
             services.AddOptions<ApplicationArguments>()
                     .Configure(x => x.DictionaryFileName = inputFileName)
                     .ValidateDataAnnotations();
-        }
-        else
-        {
-            Console.WriteLine("File not found");
-            Console.WriteLine("Please make sure your file is in a folder called Data in the same directory as this executable.");
         }
 
         services.AddSingleton<IRunner, Runner>();
@@ -40,8 +40,13 @@ await host.RunAsync();
 
 static async void Start(IServiceProvider services)
 {
+    Console.WriteLine("Starting Anagram Finder");
+
     using IServiceScope serviceScope = services.CreateScope();
     IServiceProvider provider = serviceScope.ServiceProvider;
+    var options = provider.GetService<IOptions<ApplicationArguments>>();
+
     Runner runner = (Runner)provider.GetService<IRunner>();
-    await runner.Run(@"Data\example2.txt");
+    await runner.Run($@"{options.Value.DictionaryFileName}");
+    Environment.Exit(0);
 }
