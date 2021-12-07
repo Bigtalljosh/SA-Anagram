@@ -1,10 +1,10 @@
 ﻿using Anagram;
 using Anagram.Logic.IO;
 using Anagram.Logic.Solvers;
+using Anagram.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Text;
 
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureLogging(builder =>
@@ -28,7 +28,8 @@ using IHost host = Host.CreateDefaultBuilder(args)
             Console.WriteLine("Please make sure your file is in a folder called Data in the same directory as this executable.");
         }
 
-        services.AddSingleton<IAnagramSolver, AnagramSolver>();
+        services.AddSingleton<IRunner, Runner>();
+        services.AddScoped<IAnagramSolver, AnagramSolver>();
         services.AddSingleton<IFileReader, FileReader>();
     })
     .Build();
@@ -41,19 +42,6 @@ static async void Start(IServiceProvider services)
 {
     using IServiceScope serviceScope = services.CreateScope();
     IServiceProvider provider = serviceScope.ServiceProvider;
-
-    FileReader reader = (FileReader)provider.GetService<IFileReader>();
-    var wordList = reader.GetAllWordsOfLengthFromFile(@"Data\example2.txt", 8);
-
-    AnagramSolver solver = (AnagramSolver)provider.GetService<IAnagramSolver>();
-    var results = await solver.SolveAnagrams(wordList);
-
-    var sb = new StringBuilder();
-
-    foreach (var result in results)
-    {
-        sb.AppendLine($"Word {result.Key} has the anagrams: {string.Join(", ", result.Value)}");
-    }
-
-    Console.WriteLine(sb.ToString());
+    Runner runner = (Runner)provider.GetService<IRunner>();
+    await runner.Run(@"Data\example2.txt");
 }

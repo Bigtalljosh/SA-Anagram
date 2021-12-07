@@ -16,6 +16,8 @@ public class AnagramSolver : IAnagramSolver
 
     public async Task<Dictionary<string, List<string>>> SolveAnagrams(IAsyncEnumerable<string> words)
     {
+        _anagrams.Clear();
+
         await foreach (var word in words)
         {
             if (_anagrams.ContainsKey(word))
