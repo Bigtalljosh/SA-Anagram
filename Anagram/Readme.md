@@ -54,7 +54,7 @@ From the solution directory run:
 
 #### Testing the Project
 
-`dotnet test` - Run tests from the command line.
+`dotnet test` - Run tests from the command line. There are both Integration and Unit tests in this project.
 
 #### Running from source
 
@@ -94,8 +94,6 @@ I would not be able to make this assumption and the loop falls apart in practica
 
 I would ensure my file reader had some safe guarding in place, checking file names, extensions, existance etc.
 And also write tests for these use cases. 
-
-I would fix the integration tests. 
 
 I'd include some benchmarks in the project. I did actually perform some rudimentary benchmarking myself before submission.
 This resulted in me actually stripping out a lot of logging from the solution. 

@@ -2,13 +2,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Xunit;
 
-/// <summary>
-/// These tests don't run just yet, I had some odd behaviour with the async nature of the application
-/// Unfortunately, Integration tests are not a mature feature for console applications in .NET at this time
-/// In ASP.NET this is trivial to do with the use of WebApplicationFactory, you can spin up a version of your application
-/// And feed it requests as normal asserting various results.
-/// </summary>
-
 namespace Anagram.Runner.IntegrationTests
 {
     public class RunnerTests
@@ -55,8 +48,8 @@ namespace Anagram.Runner.IntegrationTests
 
             await process.WaitForExitAsync();
 
-            Assert.Equal("abc,bac,cba", output[1]);
-            Assert.Equal("fun,unf", output[2]);
+            Assert.Contains("Word abc has the anagrams: abc, bac, cba", output);
+            Assert.Contains("Word fun has the anagrams: fun, fun, unf", output);
         }
     }
 }
